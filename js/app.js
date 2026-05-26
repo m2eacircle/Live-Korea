@@ -492,3 +492,145 @@ function closeTermsModal() {
   modal.style.display = 'none';
   document.body.style.overflow = '';
 }
+
+/* ── Install Popup ─────────────────────────────────────────────────── */
+(function() {
+  var STORAGE_KEY = 'lk_install_dismissed';
+  var DELAY_MS    = 4000;   // show after 4s
+  var popup       = null;
+
+  var i18n = {
+    en: {
+      title:   'Hidden K-Drama Stories',
+      sub:     'Live Korea',
+      body:    'Install this app on your home screen for quick access — no App Store needed.',
+      iosSteps:[
+        '① Tap the <strong>Share</strong> button (📤) in Safari',
+        '② Choose <strong>"Add to Home Screen"</strong>',
+        '③ Tap <strong>"Add"</strong> — done!'
+      ],
+      install: 'Install App',
+      dismiss: 'Not now'
+    },
+    ko: {
+      title:   '히든 K-드라마 스토리',
+      sub:     'Live Korea',
+      body:    '홈 화면에 추가하면 앱처럼 빠르게 실행할 수 있습니다.',
+      iosSteps:[
+        '① Safari 하단 <strong>공유</strong> 버튼(📤) 탭',
+        '② <strong>"홈 화면에 추가"</strong> 선택',
+        '③ <strong>"추가"</strong> 탭 — 완료!'
+      ],
+      install: '앱 설치',
+      dismiss: '나중에'
+    }
+  };
+
+  function isIos() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent);
+  }
+  function isInStandaloneMode() {
+    return (window.navigator.standalone === true) ||
+           window.matchMedia('(display-mode: standalone)').matches;
+  }
+  function wasDismissed() {
+    try { return !!localStorage.getItem(STORAGE_KEY); } catch(e) { return false; }
+  }
+  function markDismissed() {
+    try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+  }
+
+  function taegeukSVG(size) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="'+size+'" height="'+size+'">'
+      + '<circle cx="50" cy="50" r="50" fill="white"/>'
+      + '<path d="M50,10 A40,40 0 0,1 50,90 A20,20 0 0,1 50,50 A20,20 0 0,0 50,10 Z" fill="#CD2E3A"/>'
+      + '<path d="M50,10 A40,40 0 0,0 50,90 A20,20 0 0,0 50,50 A20,20 0 0,1 50,10 Z" fill="#003478"/>'
+      + '<circle cx="50" cy="30" r="10" fill="#CD2E3A"/>'
+      + '<circle cx="50" cy="70" r="10" fill="#003478"/>'
+      + '</svg>';
+  }
+
+  function buildPopup(lang, deferredPrompt) {
+    var t   = i18n[lang] || i18n.en;
+    var ios = isIos();
+    var el  = document.createElement('div');
+    el.id   = 'lkInstallPopup';
+    el.className = 'install-popup';
+
+    var stepsHtml = '';
+    if (ios) {
+      stepsHtml = '<div class="install-popup-steps">'
+        + t.iosSteps.map(function(s){ return '<div><span class="step-icon"></span>' + s + '</div>'; }).join('')
+        + '</div>';
+    }
+
+    var actionBtn = ios
+      ? '<button class="install-popup-btn primary" id="lkInstallOk">✓ Got it!</button>'
+      : '<button class="install-popup-btn primary" id="lkInstallOk">' + t.install + '</button>';
+
+    el.innerHTML =
+      '<div class="install-popup-top">'
+      +   '<div class="install-popup-icon">' + taegeukSVG(36) + '</div>'
+      +   '<div>'
+      +     '<div class="install-popup-app-name">' + t.title + '</div>'
+      +     '<div class="install-popup-app-sub">' + t.sub + '</div>'
+      +   '</div>'
+      +   '<button class="install-popup-close" id="lkInstallClose" aria-label="Close">&times;</button>'
+      + '</div>'
+      + '<div class="install-popup-body">' + t.body + '</div>'
+      + stepsHtml
+      + '<div class="install-popup-actions">'
+      +   '<button class="install-popup-btn secondary" id="lkInstallDismiss">' + t.dismiss + '</button>'
+      +   actionBtn
+      + '</div>';
+
+    document.body.appendChild(el);
+    popup = el;
+
+    // show with animation
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() { el.classList.add('visible'); });
+    });
+
+    function hide() {
+      el.classList.remove('visible');
+      setTimeout(function(){ if (el.parentNode) el.parentNode.removeChild(el); }, 500);
+    }
+
+    document.getElementById('lkInstallClose').addEventListener('click', function() {
+      markDismissed(); hide();
+    });
+    document.getElementById('lkInstallDismiss').addEventListener('click', function() {
+      markDismissed(); hide();
+    });
+    document.getElementById('lkInstallOk').addEventListener('click', function() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(r) {
+          markDismissed(); hide();
+        });
+      } else {
+        markDismissed(); hide();
+      }
+    });
+  }
+
+  var deferredPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  window.addEventListener('DOMContentLoaded', function() {
+    if (isInStandaloneMode()) return;
+    if (wasDismissed()) return;
+
+    setTimeout(function() {
+      var lang = (typeof getLang === 'function') ? getLang() : 'en';
+      if (isIos() || deferredPrompt) {
+        buildPopup(lang, deferredPrompt);
+      }
+    }, DELAY_MS);
+  });
+})();

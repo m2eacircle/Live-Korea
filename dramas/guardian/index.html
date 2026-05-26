@@ -17,6 +17,8 @@
       color: var(--accent2); margin-bottom: 10px;
     }
     .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
+
+    /* ── Story cards ─────────────────────────────────── */
     .story-card {
       background: var(--card); border: 1.5px solid var(--border);
       border-radius: var(--radius); overflow: hidden;
@@ -25,25 +27,33 @@
     }
     .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
     .story-card-inner { display: flex; }
+
     .story-thumb {
-      width: 110px; min-width: 110px; position: relative;
+      width: 120px; min-width: 120px; position: relative;
       background: linear-gradient(135deg, var(--card2), var(--card3));
       display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; flex-shrink: 0;
+      font-size: 2rem; flex-shrink: 0; align-self: stretch;
     }
-    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-thumb img {
+      width: 120px; height: 100%; min-height: 110px;
+      object-fit: cover; object-position: center top; display: block;
+    }
     .story-num-badge {
       position: absolute; bottom: 6px; left: 7px;
       background: rgba(255,255,255,0.92); color: var(--accent2);
       font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
       border-radius: 10px; border: 1px solid var(--border);
+      white-space: nowrap;
     }
+
     .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+
+    /* STORY label — normal readable font, not display uppercase */
     .story-label {
-      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
-      letter-spacing: 1.8px; text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 600;
       color: var(--accent2); margin-bottom: 5px;
     }
+
     .story-title-en {
       font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
       color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
@@ -58,6 +68,7 @@
       font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
       font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
     }
+
     .btn-youtube {
       display: inline-flex; align-items: center; gap: 6px;
       background: linear-gradient(135deg, var(--accent), #d91a60);
@@ -70,9 +81,36 @@
       background: var(--card2); color: var(--muted);
       border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
     }
-    @media (max-width: 500px) {
-      .story-thumb { width: 80px; min-width: 80px; }
-      .story-thumb img { width: 80px; }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 480px) {
+      /* Thumbnail narrows gracefully on small screens */
+      .story-thumb { width: 88px; min-width: 88px; }
+      .story-thumb img { width: 88px; min-height: 90px; }
+
+      /* Tighten content padding */
+      .story-content { padding: 11px 12px 12px 11px; }
+
+      /* Slightly smaller title on very narrow screens */
+      .story-title-en { font-size: 0.88rem; }
+      .story-title-ko { font-size: 0.88rem; }
+      .story-body-en  { font-size: 0.80rem; }
+      .story-body-ko  { font-size: 0.80rem; }
+
+      /* YouTube button: full width on mobile */
+      .btn-youtube { width: 100%; justify-content: center; padding: 9px 12px; }
+
+      /* Page header: stack on mobile */
+      .page-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .page-header-thumb { width: 100% !important; height: 160px !important; border-radius: 12px; }
+      .page-header-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+      .page-header-title { font-size: 1.05rem; }
+    }
+
+    @media (max-width: 360px) {
+      .story-thumb { width: 76px; min-width: 76px; }
+      .story-thumb img { width: 76px; }
+      .story-label { font-size: 0.68rem; }
     }
   </style>
 </head>
@@ -80,7 +118,13 @@
 
 <header class="topbar">
   <div class="topbar-left">
-    <button class="btn-topbar-home" onclick="goHome()" title="Home">&#127968;</button>
+    <button class="btn-topbar-home" onclick="goHome()" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="22" height="22" aria-label="Home">
+  <circle cx="50" cy="50" r="49" fill="white" stroke="#ccc" stroke-width="1"/>
+  <path d="M50,10 A40,40 0 0,1 50,90 A20,20 0 0,1 50,50 A20,20 0 0,0 50,10 Z" fill="#CD2E3A"/>
+  <path d="M50,10 A40,40 0 0,0 50,90 A20,20 0 0,0 50,50 A20,20 0 0,1 50,10 Z" fill="#003478"/>
+  <circle cx="50" cy="30" r="10" fill="#CD2E3A"/>
+  <circle cx="50" cy="70" r="10" fill="#003478"/>
+</svg></button>
     <div class="topbar-logo">
       <span class="logo-live">Hidden</span>
       <div class="logo-dot"></div>
