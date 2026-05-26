@@ -1,5 +1,5 @@
 /* ============================================================
-   K-Drama Trivia — Core JavaScript
+   Hidden K-Drama Stories — Core JavaScript
    Handles: language, bookmarks, toast, terms, shared utils
    ============================================================ */
 
@@ -91,7 +91,7 @@ function buildLangToggle() {
 /* ── i18n strings ──────────────────────────────────────────── */
 var LK_I18N = {
   en: {
-    'home.hero.title': '🎬 K-Drama Trivia',
+    'home.hero.title': '🎬 <span class="hero-accent">Hidden</span> K-Drama Stories',
     'home.hero.sub': 'Untold backstories, behind-the-scenes secrets, and fascinating trivia from your favourite K-Dramas.',
     'home.shows.label': '📺 Dramas',
     'guardian.meta': '24 YouTube Shorts · Fantasy Romance',
@@ -107,7 +107,7 @@ var LK_I18N = {
     'footer.terms': 'Terms of Use',
   },
   ko: {
-    'home.hero.title': '🎬 K-드라마 트리비아',
+    'home.hero.title': '🎬 숨겨진 <span class="hero-kr">K-드라마</span> 이야기',
     'home.hero.sub': '좋아하는 K-드라마의 숨겨진 뒷이야기, 촬영 비하인드, 흥미로운 트리비아를 만나보세요.',
     'home.shows.label': '📺 드라마',
     'guardian.meta': '유튜브 쇼츠 24개 · 판타지 로맨스',
@@ -361,18 +361,18 @@ function injectTermsModal() {
     '<div id="tm-content-en">',
     '<div style="text-align:center;margin-bottom:20px;">',
     '<div style="font-size:2.4rem;margin-bottom:10px;">\ud83c\udfa5</div>',
-    '<div style="font-family:\'Syne\',sans-serif;font-size:1.25rem;font-weight:800;color:var(--accent);">K-Drama Trivia</div>',
+    '<div style="font-family:\'Syne\',sans-serif;font-size:1.25rem;font-weight:800;color:var(--accent);">Hidden K-Drama Stories</div>',
     '<div style="font-size:0.76rem;color:var(--muted);margin-top:4px;">by m2ea Labs &mdash; Terms of Use</div>',
     '</div>',
 
     /* agreed badge */
     '<div id="tm-agreed-en" style="display:none;background:rgba(5,150,105,0.08);border:1.5px solid var(--green);border-radius:10px;padding:11px 16px;margin-bottom:16px;">',
     '<div style="font-size:0.85rem;font-weight:700;color:var(--green);">\u2705 You have agreed to these Terms of Use.</div>',
-    '<div style="font-size:0.76rem;color:var(--muted);margin-top:3px;">Your agreement is saved on this device. Thank you for using K-Drama Trivia responsibly.</div>',
+    '<div style="font-size:0.76rem;color:var(--muted);margin-top:3px;">Your agreement is saved on this device. Thank you for using Hidden K-Drama Stories responsibly.</div>',
     '</div>',
 
     _tmCard('Welcome',
-      '<p>Welcome to <strong>K-Drama Trivia</strong> \u2014 learn Korean through real YouTube Shorts from your favourite K-dramas. Each short connects to a natural Korean expression used in the show.</p>'),
+      '<p>Welcome to <strong>Hidden K-Drama Stories</strong> \u2014 learn Korean through real YouTube Shorts from your favourite K-dramas. Each short connects to a natural Korean expression used in the show.</p>'),
 
     _tmCard('Terms of Use',
       '<ul style="list-style:none;padding:0;margin:0;">'
@@ -382,8 +382,8 @@ function injectTermsModal() {
       + _tmLi('YouTube Shorts embedded in this app <strong>may include ads served by YouTube</strong>. These are not controlled by m2ea Labs.')
       + '</ul>'),
 
-    _tmCard('About K-Drama Trivia',
-      '<p>K-Drama Trivia brings you the untold backstories, production secrets, and fascinating trivia behind the K-Dramas you love.</p>'
+    _tmCard('About Hidden K-Drama Stories',
+      '<p>Hidden K-Drama Stories brings you the untold backstories, production secrets, and fascinating trivia behind the K-Dramas you love.</p>'
       + '<p style="margin-top:8px;">This app covers: <strong>Guardian: The Lonely and Great God</strong>, <strong>The Glory</strong>, and <strong>All of Us Are Dead</strong>. More dramas coming soon.</p>'
       + '<p style="margin-top:8px;">Operated by <strong>m2ea Labs</strong> as a language study project. All video content remains the property of its original owners.</p>'),
 
@@ -394,17 +394,17 @@ function injectTermsModal() {
     '<div id="tm-content-ko" style="display:none;font-family:\'Noto Sans KR\',\'DM Sans\',sans-serif;word-break:keep-all;">',
     '<div style="text-align:center;margin-bottom:20px;">',
     '<div style="font-size:2.4rem;margin-bottom:10px;">\ud83c\udfa5</div>',
-    '<div style="font-family:\'Syne\',sans-serif;font-size:1.25rem;font-weight:800;color:var(--accent);">K-Drama Trivia</div>',
+    '<div style="font-family:\'Syne\',sans-serif;font-size:1.25rem;font-weight:800;color:var(--accent);">Hidden K-Drama Stories</div>',
     '<div style="font-size:0.76rem;color:var(--muted);margin-top:4px;">m2ea Labs &mdash; \uc774\uc6a9\uc57d\uad00</div>',
     '</div>',
 
     '<div id="tm-agreed-ko" style="display:none;background:rgba(5,150,105,0.08);border:1.5px solid var(--green);border-radius:10px;padding:11px 16px;margin-bottom:16px;">',
     '<div style="font-size:0.85rem;font-weight:700;color:var(--green);">\u2705 \uc774\uc6a9\uc57d\uad00\uc5d0 \ub3d9\uc758\ud558\uc168\uc2b5\ub2c8\ub2e4.</div>',
-    '<div style="font-size:0.76rem;color:var(--muted);margin-top:3px;">\ub3d9\uc758 \ub0b4\uc6a9\uc774 \uc774 \uae30\uae30\uc5d0 \uc800\uc7a5\ub418\uc5c8\uc2b5\ub2c8\ub2e4. K-Drama Trivia\ub97c \uc787\uc74c\ubaa9\uac8c \uc774\uc6a9\ud574 \uc8fc\uc154\uc11c \uac10\uc0ac\ud569\ub2c8\ub2e4.</div>',
+    '<div style="font-size:0.76rem;color:var(--muted);margin-top:3px;">\ub3d9\uc758 \ub0b4\uc6a9\uc774 \uc774 \uae30\uae30\uc5d0 \uc800\uc7a5\ub418\uc5c8\uc2b5\ub2c8\ub2e4. Hidden K-Drama Stories\ub97c \uc787\uc74c\ubaa9\uac8c \uc774\uc6a9\ud574 \uc8fc\uc154\uc11c \uac10\uc0ac\ud569\ub2c8\ub2e4.</div>',
     '</div>',
 
     _tmCard('\ud83d\udc4b \ud658\uc601\ud569\ub2c8\ub2e4',
-      '<p><strong>K-Drama Trivia</strong>\uc5d0 \uc624\uc2e0 \uac83\uc744 \ud658\uc601\ud569\ub2c8\ub2e4. \uc88b\uc544\ud558\ub294 K-\ub4dc\ub77c\ub9c8\uc758 YouTube \uc264\uce20\ub97c \ud1b5\ud574 \uc790\uc5f0\uc2a4\ub7ec\uc6b4 \ud55c\uad6d\uc5b4 \ud45c\ud604\uc744 \uc7ac\ubbf8\uc788\uac8c \ubc30\uc6b8 \uc218 \uc788\uc2b5\ub2c8\ub2e4.</p>'),
+      '<p><strong>Hidden K-Drama Stories</strong>\uc5d0 \uc624\uc2e0 \uac83\uc744 \ud658\uc601\ud569\ub2c8\ub2e4. \uc88b\uc544\ud558\ub294 K-\ub4dc\ub77c\ub9c8\uc758 YouTube \uc264\uce20\ub97c \ud1b5\ud574 \uc790\uc5f0\uc2a4\ub7ec\uc6b4 \ud55c\uad6d\uc5b4 \ud45c\ud604\uc744 \uc7ac\ubbf8\uc788\uac8c \ubc30\uc6b8 \uc218 \uc788\uc2b5\ub2c8\ub2e4.</p>'),
 
     _tmCard('\ud83d\udccc \uc774\uc6a9\uc57d\uad00',
       '<ul style="list-style:none;padding:0;margin:0;">'
@@ -415,7 +415,7 @@ function injectTermsModal() {
       + '</ul>'),
 
     _tmCard('\u2139\ufe0f \uc571 \uc18c\uac1c',
-      '<p>K-Drama Trivia\ub294 \uc5ec\ub7ec\ubd84\uc774 \uc0ac\ub791\ud558\ub294 K-\ub4dc\ub77c\ub9c8 \uc18d \uc228\uaca8\uc9c4 \ubba4\uc774\uc57c\uae30\uc640 \uc81c\uc791 \ube44\ud654\ub97c \uc804\ud569\ub2c8\ub2e4.</p>'
+      '<p>Hidden K-Drama Stories\ub294 \uc5ec\ub7ec\ubd84\uc774 \uc0ac\ub791\ud558\ub294 K-\ub4dc\ub77c\ub9c8 \uc18d \uc228\uaca8\uc9c4 \ubba4\uc774\uc57c\uae30\uc640 \uc81c\uc791 \ube44\ud654\ub97c \uc804\ud569\ub2c8\ub2e4.</p>'
       + '<p style="margin-top:8px;">\ud604\uc7ac \uc81c\uacf5 \ub4dc\ub77c\ub9c8: <strong>\ub3c4\uae68\ube44</strong>, <strong>\ub354 \uae00\ub85c\ub9ac</strong>, <strong>\uc9c0\uae08 \uc6b0\ub9ac \ud559\uad50\ub294</strong>. \ub354 \ub9ce\uc740 \ub4dc\ub77c\ub9c8\uac00 \ucd94\uac00\ub420 \uc608\uc815\uc785\ub2c8\ub2e4.</p>'
       + '<p style="margin-top:8px;">\uc774 \uc571\uc740 <strong>m2ea Labs</strong>\uc5d0\uc11c \ud55c\uad6d\uc5b4 \ud559\uc2b5 \ud504\ub85c\uc81d\ud2b8\ub85c \uc6b4\uc601\ud569\ub2c8\ub2e4.</p>'),
 
@@ -492,145 +492,3 @@ function closeTermsModal() {
   modal.style.display = 'none';
   document.body.style.overflow = '';
 }
-
-/* ── Install Popup ─────────────────────────────────────────────────── */
-(function() {
-  var STORAGE_KEY = 'lk_install_dismissed';
-  var DELAY_MS    = 4000;   // show after 4s
-  var popup       = null;
-
-  var i18n = {
-    en: {
-      title:   'K-Drama Trivia',
-      sub:     'Live Korea',
-      body:    'Install this app on your home screen for quick access — no App Store needed.',
-      iosSteps:[
-        '① Tap the <strong>Share</strong> button (📤) in Safari',
-        '② Choose <strong>"Add to Home Screen"</strong>',
-        '③ Tap <strong>"Add"</strong> — done!'
-      ],
-      install: 'Install App',
-      dismiss: 'Not now'
-    },
-    ko: {
-      title:   'K-드라마 트리비아',
-      sub:     'Live Korea',
-      body:    '홈 화면에 추가하면 앱처럼 빠르게 실행할 수 있습니다.',
-      iosSteps:[
-        '① Safari 하단 <strong>공유</strong> 버튼(📤) 탭',
-        '② <strong>"홈 화면에 추가"</strong> 선택',
-        '③ <strong>"추가"</strong> 탭 — 완료!'
-      ],
-      install: '앱 설치',
-      dismiss: '나중에'
-    }
-  };
-
-  function isIos() {
-    return /iphone|ipad|ipod/i.test(navigator.userAgent);
-  }
-  function isInStandaloneMode() {
-    return (window.navigator.standalone === true) ||
-           window.matchMedia('(display-mode: standalone)').matches;
-  }
-  function wasDismissed() {
-    try { return !!localStorage.getItem(STORAGE_KEY); } catch(e) { return false; }
-  }
-  function markDismissed() {
-    try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
-  }
-
-  function taegeukSVG(size) {
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="'+size+'" height="'+size+'">'
-      + '<circle cx="50" cy="50" r="50" fill="white"/>'
-      + '<path d="M50,10 A40,40 0 0,1 50,90 A20,20 0 0,1 50,50 A20,20 0 0,0 50,10 Z" fill="#CD2E3A"/>'
-      + '<path d="M50,10 A40,40 0 0,0 50,90 A20,20 0 0,0 50,50 A20,20 0 0,1 50,10 Z" fill="#003478"/>'
-      + '<circle cx="50" cy="30" r="10" fill="#CD2E3A"/>'
-      + '<circle cx="50" cy="70" r="10" fill="#003478"/>'
-      + '</svg>';
-  }
-
-  function buildPopup(lang, deferredPrompt) {
-    var t   = i18n[lang] || i18n.en;
-    var ios = isIos();
-    var el  = document.createElement('div');
-    el.id   = 'lkInstallPopup';
-    el.className = 'install-popup';
-
-    var stepsHtml = '';
-    if (ios) {
-      stepsHtml = '<div class="install-popup-steps">'
-        + t.iosSteps.map(function(s){ return '<div><span class="step-icon"></span>' + s + '</div>'; }).join('')
-        + '</div>';
-    }
-
-    var actionBtn = ios
-      ? '<button class="install-popup-btn primary" id="lkInstallOk">✓ Got it!</button>'
-      : '<button class="install-popup-btn primary" id="lkInstallOk">' + t.install + '</button>';
-
-    el.innerHTML =
-      '<div class="install-popup-top">'
-      +   '<div class="install-popup-icon">' + taegeukSVG(36) + '</div>'
-      +   '<div>'
-      +     '<div class="install-popup-app-name">' + t.title + '</div>'
-      +     '<div class="install-popup-app-sub">' + t.sub + '</div>'
-      +   '</div>'
-      +   '<button class="install-popup-close" id="lkInstallClose" aria-label="Close">&times;</button>'
-      + '</div>'
-      + '<div class="install-popup-body">' + t.body + '</div>'
-      + stepsHtml
-      + '<div class="install-popup-actions">'
-      +   '<button class="install-popup-btn secondary" id="lkInstallDismiss">' + t.dismiss + '</button>'
-      +   actionBtn
-      + '</div>';
-
-    document.body.appendChild(el);
-    popup = el;
-
-    // show with animation
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() { el.classList.add('visible'); });
-    });
-
-    function hide() {
-      el.classList.remove('visible');
-      setTimeout(function(){ if (el.parentNode) el.parentNode.removeChild(el); }, 500);
-    }
-
-    document.getElementById('lkInstallClose').addEventListener('click', function() {
-      markDismissed(); hide();
-    });
-    document.getElementById('lkInstallDismiss').addEventListener('click', function() {
-      markDismissed(); hide();
-    });
-    document.getElementById('lkInstallOk').addEventListener('click', function() {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(function(r) {
-          markDismissed(); hide();
-        });
-      } else {
-        markDismissed(); hide();
-      }
-    });
-  }
-
-  var deferredPrompt = null;
-
-  window.addEventListener('beforeinstallprompt', function(e) {
-    e.preventDefault();
-    deferredPrompt = e;
-  });
-
-  window.addEventListener('DOMContentLoaded', function() {
-    if (isInStandaloneMode()) return;
-    if (wasDismissed()) return;
-
-    setTimeout(function() {
-      var lang = (typeof getLang === 'function') ? getLang() : 'en';
-      if (isIos() || deferredPrompt) {
-        buildPopup(lang, deferredPrompt);
-      }
-    }, DELAY_MS);
-  });
-})();
