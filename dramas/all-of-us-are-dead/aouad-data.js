@@ -1,5 +1,5 @@
 /* ============================================================
-   Hidden K-Drama Stories — All of Us Are Dead (지금 우리 학교는)
+   K-Drama Trivia — All of Us Are Dead (지금 우리 학교는)
    ============================================================ */
 
 var AOUAD_DATA = {
