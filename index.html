@@ -322,27 +322,25 @@
       <span class="show-badge">🔥 Popular</span>
     </a>
 
-    <!-- THE GLORY — Coming Soon -->
-    <div class="show-card disabled" data-drama="glory" title="Coming soon — study content in preparation">
-      <div class="show-card-banner glory-banner" style="position:relative;overflow:hidden;">
+    <!-- THE GLORY -->
+    <a class="show-card" href="dramas/glory/index.html" data-drama="glory">
+      <button class="bm-corner" data-bm-id="show-glory"
+        onclick="event.preventDefault();event.stopPropagation();
+                 toggleBookmark('show','show-glory','🥀 The Glory','dramas/glory/index.html')"
+        title="Bookmark">🔖</button>
+      <div class="show-card-banner glory-banner">
         <img src="images/glory.jpg" alt="The Glory"
-          style="filter:grayscale(20%) brightness(0.85);"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">🥀</div>
+        <div class="banner-emoji-large" style="display:none;">🥀</div>
         <div class="show-card-overlay"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
-            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
-            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
-        </div>
       </div>
       <div class="show-card-body">
-        <div class="show-card-title" style="color:var(--muted);">The Glory</div>
+        <div class="show-card-title">The Glory</div>
         <div class="show-card-title-kr">더 글로리</div>
-        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+        <div class="show-card-meta" data-i18n="glory.meta">17 YouTube Shorts · Thriller Drama</div>
       </div>
-      <span class="show-badge coming-badge">Coming Soon</span>
-    </div>
+      <span class="show-badge">✨ New</span>
+    </a>
 
     <!-- WHEN LIFE GIVES YOU TANGERINES — Coming Soon -->
     <div class="show-card disabled" data-drama="tangerines" title="Coming soon — study content in preparation">
