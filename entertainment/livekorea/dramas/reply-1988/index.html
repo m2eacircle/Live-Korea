@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reply 1988 &mdash; Hidden K-Drama Stories</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .drama-info-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 22px 24px;
+      margin-bottom: 28px; box-shadow: var(--shadow);
+    }
+    .drama-info-card .di-label {
+      font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 10px;
+    }
+    .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
+    .story-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
+    .story-card-inner { display: flex; }
+    .story-thumb {
+      width: 110px; min-width: 110px; position: relative;
+      background: linear-gradient(135deg, var(--card2), var(--card3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
+    }
+    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-num-badge {
+      position: absolute; bottom: 6px; left: 7px;
+      background: rgba(255,255,255,0.92); color: var(--accent2);
+      font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+    .story-label {
+      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 5px;
+    }
+    .story-title-en {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
+    }
+    .story-title-ko {
+      font-size: 0.95rem; font-weight: 800; color: var(--accent);
+      line-height: 1.35; margin-bottom: 7px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .story-body-en { font-size: 0.84rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .story-body-ko {
+      font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .btn-youtube {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #d91a60);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 16px; font-size: 0.8rem; font-weight: 800;
+      cursor: pointer; transition: all 0.22s; text-decoration: none; font-family: inherit;
+    }
+    .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+    .btn-youtube.pending {
+      background: var(--card2); color: var(--muted);
+      border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="btn-topbar-home" onclick="goHome()" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="22" height="22" aria-label="Home">
+  <circle cx="50" cy="50" r="49" fill="white" stroke="#ccc" stroke-width="1"/>
+  <path d="M50,10 A40,40 0 0,1 50,90 A20,20 0 0,1 50,50 A20,20 0 0,0 50,10 Z" fill="#CD2E3A"/>
+  <path d="M50,10 A40,40 0 0,0 50,90 A20,20 0 0,0 50,50 A20,20 0 0,1 50,10 Z" fill="#003478"/>
+  <circle cx="50" cy="30" r="10" fill="#CD2E3A"/>
+  <circle cx="50" cy="70" r="10" fill="#003478"/>
+</svg></button>
+    <div class="topbar-logo">
+      <span class="logo-live">K-Drama</span>
+      <div class="logo-dot"></div>
+      <span class="logo-korea">Trivia</span>
+    </div>
+  </div>
+  <div class="topbar-right" id="topbar-lang-wrap"></div>
+</header>
+
+<main>
+<div class="page-wrap">
+
+  <nav class="nav-row">
+    <button class="btn-nav home" onclick="goHome()">&#127968; <span id="nav-home">Home</span></button>
+    <button class="btn-nav" onclick="history.back()">&#9664; <span id="nav-back">Back</span></button>
+  </nav>
+
+  <nav class="breadcrumb">
+    <a href="../../index.html">Hidden K-Drama Stories</a>
+    <span class="sep">&#8250;</span>
+    <span class="current" id="bc-drama">Reply 1988</span>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-thumb">
+      <img src="../../images/reply-1988.jpg" alt="Reply 1988"
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#fffbeb,#fde68a)';this.parentElement.innerHTML='&#128251;';">
+    </div>
+    <div class="page-header-info">
+      <div class="page-header-title" id="hdr-title">Reply 1988</div>
+      <div class="page-header-meta" id="hdr-meta">8 YouTube Shorts &middot; 2015&ndash;2016 &middot; Coming-of-Age Drama</div>
+      <div class="page-header-actions">
+        <button class="btn-bm" data-bm-id="show-reply-1988"
+          onclick="toggleBookmark('show','show-reply-1988','&#128251; Reply 1988','dramas/reply-1988/index.html')">
+          &#128278; <span id="bm-label">Bookmark</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="drama-info-card" id="desc-en" data-lang-en>
+    <div class="di-label">&#127916; About This Drama</div>
+    <div class="di-desc">
+      <strong>Reply 1988</strong> is a 2015&ndash;2016 tvN Korean drama set in the close-knit Ssangmun-dong neighborhood of Seoul in the late 1980s. It follows teenager Deok-sun, her family, and four childhood friends growing up amid first loves, family struggles, and the warmth of a tight community.<br><br>
+      Beloved for its nostalgia, humor, and heartfelt storytelling, it became one of Korea&#39;s most cherished dramas &mdash; and sparked a nationwide guessing game over Deok-sun&#39;s future husband.
+    </div>
+  </div>
+
+  <div class="drama-info-card" id="desc-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
+    <div class="di-label">&#127916; 드라마 소개</div>
+    <div class="di-desc">
+      <strong>응답하라 1988</strong>은 2015&ndash;2016년 tvN에서 방영된 드라마로, 1980년대 후반 서울 쌍문동의 정겨운 동네를 배경으로 합니다. 주인공 덕선과 그녀의 가족, 그리고 네 명의 어린 시절 친구들이 첫사랑과 가족의 애환, 끈끈한 이웃의 정 속에서 성장하는 이야기를 그립니다.<br><br>
+      복고 감성과 유머, 따뜻한 이야기로 큰 사랑을 받았으며, 덕선의 남편이 누구인지에 대한 추측을 전국적으로 불러일으킨 한국의 대표 드라마 중 하나입니다.
+    </div>
+  </div>
+
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span class="bm-icon">&#128278;</span>
+      <span id="bm-bar-title">Your Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <div class="section-label" id="shorts-label">&#127381; YouTube Shorts &mdash; 8 Stories</div>
+  <div id="storiesList">
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep1.jpg" alt="The Singer Who Thanked Reply 1988 Personally" onerror="this.style.display='none';this.parentElement.innerHTML='&#128251;';">
+        <span class="story-num-badge">#1</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 1 / 8</div>
+        <div class="story-title-en" data-lang-en>The Singer Who Thanked Reply 1988 Personally</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">직접 감사를 전한 가수</div>
+        <div class="story-body-en" data-lang-en>One of Korea's biggest singers did something rare: on the final filming day, Lee Seung-hwan sent a food truck to the cast and crew. Why? The show, set during his career's peak, featured many of his songs. Instead of receiving a tribute, he gave one.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국 최정상 가수가 좀처럼 보기 힘든 일을 했다. 마지막 촬영 날, 이승환이 〈응답하라 1988〉 출연진과 제작진에게 직접 푸드트럭을 보낸 것. 왜? 그의 전성기를 배경으로 한 이 드라마에 그의 노래가 무척 많이 쓰였기 때문. 헌사를 받는 대신, 그가 헌사를 돌려준 셈이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep2.jpg" alt="The Secret Behind Deok-sun's Dream Job" onerror="this.style.display='none';this.parentElement.innerHTML='&#128251;';">
+        <span class="story-num-badge">#2</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 2 / 8</div>
+        <div class="story-title-en" data-lang-en>The Secret Behind Deok-sun's Dream Job</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">덕선의 꿈의 직업에 숨은 비밀</div>
+        <div class="story-body-en" data-lang-en>When Deok-sun becomes a flight attendant, it wasn't a random choice. Many Korean viewers linked it to Inha Technical College's aviation program &mdash; in the late 1980s and early 1990s, among the most prestigious, sought-after majors for young women. The drama quietly captured a generation's dream.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">덕선이 승무원이 되는 건 그저 아무 직업이나 고른 게 아니었다. 많은 한국 시청자는 이를 인하공업전문대학의 유명한 항공운항과와 연결 지었다. 1980년대 후반에서 1990년대 초, 젊은 여성에게 가장 선망받던 인기 전공 중 하나였다. 드라마는 한 세대가 품었던 꿈을 조용히 담아냈다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep3.jpg" alt="The Tteokbokki Shop Was Real" onerror="this.style.display='none';this.parentElement.innerHTML='&#128251;';">
+        <span class="story-num-badge">#3</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 3 / 8</div>
+        <div class="story-title-en" data-lang-en>The Tteokbokki Shop Was Real</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">그 떡볶이집은 실제로 있었다</div>
+        <div class="story-body-en" data-lang-en>Remember the "Brazil Tteokbokki" shop? It wasn't invented for the drama. The restaurant existed near a girls' high school in Seoul and operated until the late 1990s. Even today, old-school snack bars survive in the area &mdash; a tiny piece of real Korean nostalgia.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">유명한 '브라질 떡볶이' 가게를 기억하는가? 드라마를 위해 만들어낸 게 아니다. 그 가게는 서울의 한 여고 근처에 실제로 있었고 1990년대 후반까지 영업했다. 지금도 그 동네엔 옛날식 분식집이 남아 있다. 작은 디테일 하나가 진짜 한국의 추억으로 드러난 것이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep4.jpg" alt="Four Stars Shared the Same College" onerror="this.style.display='none';this.parentElement.innerHTML='&#128251;';">
+        <span class="story-num-badge">#4</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 4 / 8</div>
+        <div class="story-title-en" data-lang-en>Four Stars Shared the Same College</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">같은 대학을 나온 네 배우</div>
+        <div class="story-body-en" data-lang-en>Here's a coincidence most fans never noticed: Hyeri, Ryu Hye-young, Go Kyung-pyo and Ahn Jae-hong all attended the same university &mdash; and were all film majors at Konkuk University. Some even knew each other before filming. Maybe that's why their on-screen chemistry felt so natural.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 팬이 몰랐던 우연이 있다. 혜리, 류혜영, 고경표, 안재홍이 모두 같은 대학 출신이라는 것. 게다가 넷 다 건국대 영화과였다. 일부는 촬영 전부터 서로 아는 사이였다. 어쩌면 그래서 화면 속 케미가 그토록 자연스러웠는지도 모른다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep5.jpg" alt="The Neighborhood Never Existed" onerror="this.style.display='none';this.parentElement.innerHTML='&#128251;';">
+        <span class="story-num-badge">#5</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 5 / 8</div>
+        <div class="story-title-en" data-lang-en>The Neighborhood Never Existed</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">그 동네는 실재하지 않았다</div>
+        <div class="story-body-en" data-lang-en>The Ssangmun-dong alleyway looked real, but almost all of it was built from scratch &mdash; a huge set on an abandoned military base. So convincing that fans hoped it would become a tourist spot, it was demolished after filming; today the street exists only on screen.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">상징적인 쌍문동 골목은 완전히 진짜처럼 보였지만, 거의 전부 처음부터 지은 것이었다. 버려진 군부대 터에 세운 거대한 세트였다. 너무 사실적이어서 팬들은 관광 명소가 되길 바랐다. 안타깝게도 촬영 후 철거됐고, 오늘날 그 거리는 화면 속에만 존재한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep6.jpg" alt="Top Gun Changed Jung-hwan's Life" onerror="this.style.display='none';this.parentElement.innerHTML='&#128251;';">
+        <span class="story-num-badge">#6</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 6 / 8</div>
+        <div class="story-title-en" data-lang-en>Top Gun Changed Jung-hwan's Life</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈탑건〉이 바꾼 정환의 인생</div>
+        <div class="story-body-en" data-lang-en>Fans assumed Jung-hwan became a fighter pilot because of his brother, but the real reason was hidden in the drama: the 1986 film Top Gun. After watching Tom Cruise fly jets, Jung-hwan found his dream. One Hollywood blockbuster quietly shaped a beloved Reply 1988 character.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">팬들은 정환이 형 때문에 전투기 조종사가 됐다고 생각했지만, 진짜 이유는 극 중에 숨어 있었다. 바로 1986년 영화 〈탑건〉이다. 톰 크루즈가 전투기를 모는 모습을 본 뒤 정환은 꿈을 찾았다. 한 편의 할리우드 블록버스터가 〈응답하라 1988〉의 사랑받는 캐릭터를 조용히 빚어낸 것이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep7.jpg" alt="The Mystery Couple Was Almost Missing" onerror="this.style.display='none';this.parentElement.innerHTML='&#128251;';">
+        <span class="story-num-badge">#7</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 7 / 8</div>
+        <div class="story-title-en" data-lang-en>The Mystery Couple Was Almost Missing</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">하마터면 못 나올 뻔한 미스터리 부부</div>
+        <div class="story-body-en" data-lang-en>The actors who played adult Deok-sun and her husband were hard to cast. Lee Mi-yeon and Kim Joo-hyuk were both busy shooting films, so the production rearranged schedules to get them on set. Without that effort, the show's biggest mystery might have looked different.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">성인 덕선과 그 남편을 연기한 배우들은 캐스팅이 무척 어려웠다. 이미연과 김주혁은 당시 영화 촬영으로 바빴고, 제작진은 이들을 현장에 세우려 일정을 세심하게 조율해야 했다. 그 노력이 없었다면, 이 작품 최대의 미스터리는 사뭇 다른 모습이었을지도 모른다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep8.jpg" alt="The Wedding Venue Was Fake" onerror="this.style.display='none';this.parentElement.innerHTML='&#128251;';">
+        <span class="story-num-badge">#8</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 8 / 8</div>
+        <div class="story-title-en" data-lang-en>The Wedding Venue Was Fake</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">결혼식장은 가짜였다</div>
+        <div class="story-body-en" data-lang-en>The final wedding scene looked like it took place in Korea's Supreme Prosecutors' Office wedding hall &mdash; but filming there wasn't allowed. So the production found a near-identical venue: the Air Force Hall. One of Reply 1988's emotional moments happened somewhere different than viewers believed.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">마지막 결혼식 장면은 대검찰청 예식장에서 찍은 것처럼 보였지만, 그곳에서의 촬영은 허락되지 않았다. 그래서 제작진은 거의 똑같아 보이는 장소, 서울의 공군회관을 찾았다. 〈응답하라 1988〉의 가장 감동적인 순간 중 하나는 시청자들이 믿었던 곳과 전혀 다른 장소에서 벌어진 것이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+</div>
+</main>
+
+<footer class="site-footer" id="lk-footer">
+  <div class="footer-copy">&copy; 2025 m2ea Labs. All rights reserved.</div>
+  <div><a class="footer-terms" href="../../terms.html">Terms of Use / &#51060;&#50857;&#50557;&#44288;</a></div>
+</footer>
+
+<script src="../../js/app.js"></script>
+<script>
+  function goHome() { window.location.href = '../../index.html'; }
+
+  function applyPageLang() {
+    var isKo = getLang() === 'ko';
+    document.documentElement.lang = isKo ? 'ko' : 'en';
+    // null-safe helpers: the bookmark button text can be re-rendered by
+    // syncBookmarkButtons(), so guard every lookup to keep the EN/KO toggle robust.
+    function setTxt(id, v)  { var el = document.getElementById(id); if (el) el.textContent = v; }
+    function setHtml(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+    setTxt('nav-home',     isKo ? '홈' : 'Home');
+    setTxt('nav-back',     isKo ? '뒤로' : 'Back');
+    setTxt('bc-drama',     isKo ? '응답하라 1988' : 'Reply 1988');
+    setTxt('hdr-title',    isKo ? '응답하라 1988' : 'Reply 1988');
+    setTxt('hdr-meta',     isKo ? '유튜브 쇼츠 8개 · 2015–2016 · 청춘 드라마' : '8 YouTube Shorts · 2015–2016 · Coming-of-Age Drama');
+    setTxt('bm-label',     isKo ? '저장' : 'Bookmark');
+    setTxt('bm-bar-title', isKo ? '북마크' : 'Your Bookmarks');
+    setHtml('shorts-label', isKo
+      ? '&#127381; 유튜브 쇼츠 &mdash; 8개 스토리'
+      : '&#127381; YouTube Shorts &mdash; 8 Stories');
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    if (!hasAgreed()) {
+      window.location.href = '../../index.html?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
+    injectTermsModal();
+    document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
+    applyPageLang();
+    applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
+  });
+</script>
+</body>
+</html>
